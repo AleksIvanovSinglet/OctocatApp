@@ -9,19 +9,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      ###############################
-      # Upload package as artifacts #
-      ###############################
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: Bin
-          path: bin/
-          
-          
-      - run: ls -R
+        
 
 
       # This action creates a tag, based on the last one existing in the Release section
@@ -47,10 +35,8 @@ jobs:
           body: These are the changes for the release
           draft: false
           prerelease: false
-
-      - run: echo ${{ steps.create_release.outputs.upload_url }}
       
-      
+      # Uploads any file from the repo to the release
       - name: Upload Release Asset
         id: upload_release_asset 
         uses: actions/upload-release-asset@v1
@@ -61,6 +47,27 @@ jobs:
           asset_path: OctocatApp.csproj
           asset_name: OctocatApp.csproj
           asset_content_type: application/csproj
+          
+      # Uploads any file from the repo to the release
+      - name: Upload Release Asset
+        id: upload_release_asset2 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: OctocatApp.sln
+          asset_name: OctocatApp.sln
+          asset_content_type: application/sln      
       
-      - run: echo ${{ steps.upload_release_asset.outputs.browser_download_url }}
-      
+      # Uploads any file from the repo to the release
+      - name: Upload Release Asset
+        id: upload_release_asset3 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: Program.cs
+          asset_name: Program.cs
+          asset_content_type: application/cs
