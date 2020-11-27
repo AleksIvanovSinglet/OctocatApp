@@ -10,6 +10,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # This action creates a tag, based on the last one existing in the Release section
+      # by default, there are three version numbers v1.0.2 (1 is #major, 0 is #minor, 2 is #patch)
+      # to apply the pushed changes to the corresponding type, use one of those hashtags in the title field of the commit 
       - name: Bump version and push tag 
         id: tag_generator
         uses: ChloePlanet/github-tag-action@master
@@ -17,6 +20,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
 
+      # This action, right now simply creates a new release
+      # it has multiple options for further customization
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
