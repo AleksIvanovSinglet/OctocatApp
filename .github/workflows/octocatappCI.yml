@@ -41,7 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: https://api.github.com/AleksIvanovSinglet/OctocatApp/raw/master/bin/Release/OctocatApp.1.0.0.nupkg
-          asset_path: bin/Release/OctocatApp.1.0.0.nupkg
-          asset_name: OctocatApp.1.0.0.nupkg
-          asset_content_type: application/nuget
+          upload_url: https://www.w3.org/TR/PNG/iso_8859-1.txt
+          asset_path: iso_8859-1.txt
+          asset_name: iso_8859-1.txt
+          asset_content_type: text/plain
