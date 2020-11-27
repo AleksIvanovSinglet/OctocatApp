@@ -34,3 +34,4 @@ jobs:
           draft: false
           prerelease: false
 
+      - run: echo ${{ steps.create_release.outputs.upload_url }}
