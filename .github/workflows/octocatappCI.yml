@@ -21,7 +21,7 @@ jobs:
           path: bin/
           
           
-      - run: ls
+      - run: ls -R
 
 
       # This action creates a tag, based on the last one existing in the Release section
@@ -58,9 +58,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: Bin.zip
-          asset_name: Bin.zip
-          asset_content_type: application/zip
+          asset_path: OctocatApp.csproj
+          asset_name: OctocatApp.csproj
+          asset_content_type: application/csproj
       
       - run: echo ${{ steps.upload_release_asset.outputs.browser_download_url }}
       
