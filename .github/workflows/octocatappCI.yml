@@ -10,7 +10,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Bump version and push tag
+        uses: ChloePlanet/github-tag-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
 
+      - run: echo ${{ steps.github-tag-action.outputs.new_tag }}
 
       - name: Create Release
         id: create_release
