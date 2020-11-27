@@ -10,6 +10,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      ###############################
+      # Upload package as artifacts #
+      ###############################
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Bin
+          path: bin/
+
+
       # This action creates a tag, based on the last one existing in the Release section
       # by default, there are three version numbers v1.0.2 (1 is #major, 0 is #minor, 2 is #patch)
       # to apply the pushed changes to the corresponding type, use one of those hashtags in the title field of the commit 
@@ -35,3 +46,18 @@ jobs:
           prerelease: false
 
       - run: echo ${{ steps.create_release.outputs.upload_url }}
+      
+      
+      - name: Upload Release Asset
+        id: upload_release_asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./bin.zip
+          asset_name: bin.zip
+          asset_content_type: application/zip
+      
+      - run: echo ${{ steps.upload_release_asset.outputs.browser_download_url }}
+      
