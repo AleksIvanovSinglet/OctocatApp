@@ -1,0 +1,16 @@
+C:\Users\Admin\Desktop\DevOps\OctocatApp\bin\Release\net5.0\OctocatApp.exe
+C:\Users\Admin\Desktop\DevOps\OctocatApp\bin\Release\net5.0\OctocatApp.deps.json
+C:\Users\Admin\Desktop\DevOps\OctocatApp\bin\Release\net5.0\OctocatApp.runtimeconfig.json
+C:\Users\Admin\Desktop\DevOps\OctocatApp\bin\Release\net5.0\OctocatApp.runtimeconfig.dev.json
+C:\Users\Admin\Desktop\DevOps\OctocatApp\bin\Release\net5.0\OctocatApp.dll
+C:\Users\Admin\Desktop\DevOps\OctocatApp\bin\Release\net5.0\ref\OctocatApp.dll
+C:\Users\Admin\Desktop\DevOps\OctocatApp\bin\Release\net5.0\OctocatApp.pdb
+C:\Users\Admin\Desktop\DevOps\OctocatApp\obj\Release\net5.0\OctocatApp.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\DevOps\OctocatApp\obj\Release\net5.0\OctocatApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Desktop\DevOps\OctocatApp\obj\Release\net5.0\OctocatApp.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\DevOps\OctocatApp\obj\Release\net5.0\OctocatApp.AssemblyInfo.cs
+C:\Users\Admin\Desktop\DevOps\OctocatApp\obj\Release\net5.0\OctocatApp.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\DevOps\OctocatApp\obj\Release\net5.0\OctocatApp.dll
+C:\Users\Admin\Desktop\DevOps\OctocatApp\obj\Release\net5.0\ref\OctocatApp.dll
+C:\Users\Admin\Desktop\DevOps\OctocatApp\obj\Release\net5.0\OctocatApp.pdb
+C:\Users\Admin\Desktop\DevOps\OctocatApp\obj\Release\net5.0\OctocatApp.genruntimeconfig.cache
