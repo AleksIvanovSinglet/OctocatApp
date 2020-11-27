@@ -10,7 +10,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Bump version and push tag
+      - name: Bump version and push tag 
         id: tag_generator
         uses: ChloePlanet/github-tag-action@master
         env:
@@ -24,10 +24,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: ${{ steps.tag_generator.outputs.new_tag }} 
-          release_name: ${{ steps.tag_generator.outputs.new_tag }} 
-          body: |
-            Changes in this Release
-            - First Changes
+          release_name: Release ${{ steps.tag_generator.outputs.new_tag }} 
+          body: These are the changes for the release
           draft: false
           prerelease: false
 
