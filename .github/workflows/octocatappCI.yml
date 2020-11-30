@@ -23,6 +23,7 @@ jobs:
         uses: ChloePlanet/github-tag-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
 
       # This action, right now simply creates a new release
       # it has multiple options for further customization
@@ -32,8 +33,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: v${{ steps.tag_generator.outputs.new_tag }} 
-          release_name: Release v${{ steps.tag_generator.outputs.new_tag }} 
+          tag_name: ${{ steps.tag_generator.outputs.new_tag }} 
+          release_name: Release ${{ steps.tag_generator.outputs.new_tag }} 
           body: "[CHANGE LOG](https://github.com/AleksIvanovSinglet/OctocatApp/blob/master/HISTORY.md)"
           draft: false
           prerelease: false
