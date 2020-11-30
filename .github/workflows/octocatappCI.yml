@@ -32,7 +32,7 @@ jobs:
         with:
           tag_name: ${{ steps.tag_generator.outputs.new_tag }} 
           release_name: Release ${{ steps.tag_generator.outputs.new_tag }} 
-          body: These are the changes for the release
+          body_path: "[CHANGE LOG](https://github.com/AleksIvanovSinglet/OctocatApp/blob/master/HISTORY.md)"
           draft: false
           prerelease: false
       
