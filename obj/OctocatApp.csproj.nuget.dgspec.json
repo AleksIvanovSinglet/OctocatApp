@@ -1,20 +1,19 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\DevOps\\OctocatApp\\OctocatApp.csproj": {}
+    "C:\\Users\\Admin\\Desktop\\DevOps\\repos\\OctocatApp\\OctocatApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\DevOps\\OctocatApp\\OctocatApp.csproj": {
+    "C:\\Users\\Admin\\Desktop\\DevOps\\repos\\OctocatApp\\OctocatApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\DevOps\\OctocatApp\\OctocatApp.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\DevOps\\repos\\OctocatApp\\OctocatApp.csproj",
         "projectName": "OctocatApp",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\DevOps\\OctocatApp\\OctocatApp.csproj",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\DevOps\\repos\\OctocatApp\\OctocatApp.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\DevOps\\OctocatApp\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\DevOps\\repos\\OctocatApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\Desktop\\DevOps\\OctocatApp\\NuGet.Config",
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -22,7 +21,8 @@
           "net5.0"
         ],
         "sources": {
-          "https://nuget.pkg.github.com/AleksIvanovSinglet/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {

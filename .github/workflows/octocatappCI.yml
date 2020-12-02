@@ -12,6 +12,18 @@ jobs:
         
 
 
+      - name: Publish NuGet package
+        id: publish_nuget
+        uses: rohith/publish-nuget@v2
+        continue-on-error: true
+        with:
+            PROJECT_FILE_PATH: OctocatApp.csproj
+            TAG_COMMIT: true
+            NUGET_KEY: ${{secrets.TEST_PKG}}
+            PACKAGE_NAME: OctocatApp-testpkg
+
+
+
       # This action creates a tag, based on the last one existing in the Release section
       # by default, there are three version numbers v1.0.2 (1 is #major, 0 is #minor, 2 is #patch)
       # to apply the pushed changes to the corresponding type, use one of those hashtags in the title field of the commit 
