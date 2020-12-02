@@ -12,15 +12,15 @@ jobs:
 
 
 
-      - name: Publish NuGet package
-        id: publish_nuget
-        uses: rohith/publish-nuget@v2
-        continue-on-error: true
-        with:
-            PROJECT_FILE_PATH: OctocatApp.csproj
-            TAG_COMMIT: true
-            NUGET_KEY: ${{secrets.TEST_PKG}}
-            PACKAGE_NAME: OctocatApp-testpkg
+      # - name: Publish NuGet package
+      #   id: publish_nuget
+      #   uses: rohith/publish-nuget@v2
+      #   continue-on-error: true
+      #   with:
+      #       PROJECT_FILE_PATH: OctocatApp.csproj
+      #       TAG_COMMIT: true
+      #       NUGET_KEY: ${{secrets.TEST_PKG}}
+      #       PACKAGE_NAME: OctocatApp-testpkg
 
 
 
@@ -43,6 +43,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
+          CUSTOM_TAG: vBlahBlahBlah
 
       # This action, right now simply creates a new release
       # it has multiple options for further customization
