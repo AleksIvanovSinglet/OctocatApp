@@ -5,11 +5,11 @@ name: OctocatApp CI
 jobs:
   build:
     name: Create Release
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
 
 
       - name: Publish NuGet package
@@ -21,6 +21,16 @@ jobs:
             TAG_COMMIT: true
             NUGET_KEY: ${{secrets.TEST_PKG}}
             PACKAGE_NAME: OctocatApp-testpkg
+
+
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
 
 
