@@ -21,7 +21,7 @@ jobs:
       #       PACKAGE_NAME: OctocatApp-testpkg
 
       - name: Bump release version and create release tag
-        id: tag_generator
+        id: tag_version
         uses: mathieudutour/github-tag-action@v5.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -32,8 +32,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.tag_generator.outputs.new_tag }}
-          release_name: Release ${{ steps.tag_generator.outputs.new_tag }}
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: '[CHANGE LOG](HISTORY.md)'
 
       - name: Upload Release Asset
@@ -44,7 +44,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: OctocatApp.csproj
-          asset_name: OctocatApp.${{ steps.tag_generator.outputs.new_version }}.csproj
+          asset_name: OctocatApp.${{ steps.tag_version.outputs.new_version }}.csproj
           asset_content_type: application/csproj
 
       - name: Upload Release Asset
@@ -55,7 +55,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: OctocatApp.sln
-          asset_name: OctocatApp.${{ steps.tag_generator.outputs.new_tag }}.sln
+          asset_name: OctocatApp.${{ steps.tag_version.outputs.new_tag }}.sln
           asset_content_type: application/sln
 
       - name: Upload Release Asset
@@ -66,5 +66,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: Program.cs
-          asset_name: Program.${{ steps.tag_generator.outputs.new_tag }}.cs
+          asset_name: Program.${{ steps.tag_version.outputs.new_tag }}.cs
           asset_content_type: application/cs
