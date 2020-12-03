@@ -20,69 +20,51 @@ jobs:
       #       NUGET_KEY: ${{secrets.TEST_PKG}}
       #       PACKAGE_NAME: OctocatApp-testpkg
 
-  release:
-    name: Create Release
-    needs: init
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      # This action creates a tag, based on the last one existing in the Release section
-      # by default, there are three version numbers v1.0.2 (1 is #major, 0 is #minor, 2 is #patch)
-      # to apply the pushed changes to the corresponding type, use one of those hashtags in the title field of the commit
-      - name: Bump version and push tag
+      - name: Bump release version and create release tag
         id: tag_generator
-        uses: ChloePlanet/github-tag-action@master
+        uses: mathieudutour/github-tag-action@v5.1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          # CUSTOM_TAG: vBlahBlahBlah
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      # This action, right now simply creates a new release
-      # it has multiple options for further customization
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.tag_generator.outputs.new_tag }}
           release_name: Release ${{ steps.tag_generator.outputs.new_tag }}
           body: '[CHANGE LOG](HISTORY.md)'
 
-      # Uploads any file from the repo to the release
       - name: Upload Release Asset
         id: upload_release_asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: OctocatApp.csproj
-          asset_name: OctocatApp.${{ steps.tag_generator.outputs.new_tag }}.csproj
+          asset_name: OctocatApp.${{ steps.tag_generator.outputs.new_version }}.csproj
           asset_content_type: application/csproj
 
-      # Uploads any file from the repo to the release
       - name: Upload Release Asset
         id: upload_release_asset2
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: OctocatApp.sln
           asset_name: OctocatApp.${{ steps.tag_generator.outputs.new_tag }}.sln
           asset_content_type: application/sln
 
-      # Uploads any file from the repo to the release
       - name: Upload Release Asset
         id: upload_release_asset3
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: Program.cs
           asset_name: Program.${{ steps.tag_generator.outputs.new_tag }}.cs
           asset_content_type: application/cs
