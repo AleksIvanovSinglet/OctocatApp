@@ -20,7 +20,7 @@ jobs:
       #       NUGET_KEY: ${{secrets.TEST_PKG}}
       #       PACKAGE_NAME: OctocatApp-testpkg
 
-      - name: Bump release version and create release tag
+      - name: Bump release versio and create release tag
         id: tag_generator
         uses: mathieudutour/github-tag-action@v5.1
         env:
