@@ -3,8 +3,8 @@ on: push
 name: OctocatApp CI
 
 jobs:
-  build:
-    name: Create Release
+  init:
+    name: Initiate pipeline
     runs-on: windows-latest
     steps:
       - name: Checkout code
@@ -26,7 +26,7 @@ jobs:
 
   release:
     name: Create Release
-    needs: build
+    needs: init
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -43,7 +43,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-          CUSTOM_TAG: vBlahBlahBlah
+          # CUSTOM_TAG: vBlahBlahBlah
 
       # This action, right now simply creates a new release
       # it has multiple options for further customization
