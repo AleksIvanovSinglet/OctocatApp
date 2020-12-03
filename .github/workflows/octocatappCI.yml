@@ -26,6 +26,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Print tag
+        run: echo ${{ steps.tag_version.outputs.new_tag }}
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
