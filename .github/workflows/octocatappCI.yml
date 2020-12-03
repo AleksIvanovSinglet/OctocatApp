@@ -27,7 +27,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print tag
-        run: Write-Host "This is the tag - " ${{ steps.tag_version.outputs.new_tag }}
+        run: Write-Host "This is the tag -  " ${{ steps.tag_version.outputs.new_tag }}
 
       - name: Create Release
         id: create_release
