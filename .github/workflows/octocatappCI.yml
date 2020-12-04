@@ -1,4 +1,4 @@
-on: push
+on: [push, pull_request]
 
 name: OctocatApp CI
 
@@ -6,9 +6,18 @@ jobs:
   init:
     name: Initiate pipeline
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - if: github.event_name == 'push'
+        run: echo "This is push"
+
+      - if: github.event_name == 'push'
+        run: echo "This is push"
 
       # - name: Publish NuGet package
       #   id: publish_nuget
@@ -20,51 +29,51 @@ jobs:
       #       NUGET_KEY: ${{secrets.TEST_PKG}}
       #       PACKAGE_NAME: OctocatApp-testpkg
 
-      - name: Bump release version and create release tag
-        id: tag_generator
-        uses: mathieudutour/github-tag-action@v5.1
-        env:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Bump release version and create release tag
+      #   id: tag_generator
+      #   uses: mathieudutour/github-tag-action@v5.1
+      #   env:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.tag_generator.outputs.new_tag }}
-          release_name: Release ${{ steps.tag_generator.outputs.new_tag }}
-          body: '[CHANGE LOG](HISTORY.md)'
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ steps.tag_generator.outputs.new_tag }}
+      #     release_name: Release ${{ steps.tag_generator.outputs.new_tag }}
+      #     body: '[CHANGE LOG](HISTORY.md)'
 
-      - name: Upload Release Asset
-        id: upload_release_asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: OctocatApp.csproj
-          asset_name: OctocatApp.${{ steps.tag_generator.outputs.new_version }}.csproj
-          asset_content_type: application/csproj
+      # - name: Upload Release Asset
+      #   id: upload_release_asset
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: OctocatApp.csproj
+      #     asset_name: OctocatApp.${{ steps.tag_generator.outputs.new_version }}.csproj
+      #     asset_content_type: application/csproj
 
-      - name: Upload Release Asset
-        id: upload_release_asset2
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: OctocatApp.sln
-          asset_name: OctocatApp.${{ steps.tag_generator.outputs.new_tag }}.sln
-          asset_content_type: application/sln
+      # - name: Upload Release Asset
+      #   id: upload_release_asset2
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: OctocatApp.sln
+      #     asset_name: OctocatApp.${{ steps.tag_generator.outputs.new_tag }}.sln
+      #     asset_content_type: application/sln
 
-      - name: Upload Release Asset
-        id: upload_release_asset3
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: Program.cs
-          asset_name: Program.${{ steps.tag_generator.outputs.new_tag }}.cs
-          asset_content_type: application/cs
+      # - name: Upload Release Asset
+      #   id: upload_release_asset3
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: Program.cs
+      #     asset_name: Program.${{ steps.tag_generator.outputs.new_tag }}.cs
+      #     asset_content_type: application/cs
