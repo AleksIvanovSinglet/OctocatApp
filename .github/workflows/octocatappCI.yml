@@ -19,6 +19,8 @@ jobs:
       - if: github.event_name == 'pull_request'
         run: echo "This is pull_request"
 
+      - run: echo "This should always run"
+
       # - name: Publish NuGet package
       #   id: publish_nuget
       #   uses: rohith/publish-nuget@v2
