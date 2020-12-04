@@ -17,7 +17,7 @@ jobs:
         run: echo "This is push"
 
       - if: github.event_name == 'pull_request'
-        run: echo "This is push"
+        run: echo "This is pull_request"
 
       # - name: Publish NuGet package
       #   id: publish_nuget
