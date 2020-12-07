@@ -37,7 +37,7 @@ jobs:
         id: tag_text 
         run: |
           $file_text = Get-Content "tag.txt"
-          echo ::set-output name=tag_value::$file_text
+          echo '::set-output name=tag_value::$file_text'
 
       - run: Write-Output $ {{ steps.tag_text.outputs.tag_value }}
 
