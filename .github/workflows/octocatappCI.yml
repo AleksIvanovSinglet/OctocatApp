@@ -20,7 +20,7 @@ jobs:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     default_bump: false 
 
-      - run: echo 1.0.0 >> tag.txt
+      - run: echo NEW_VALUE >> tag.txt
 
       - run: ls -a -l
 
