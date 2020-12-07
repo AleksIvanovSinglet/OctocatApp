@@ -19,14 +19,14 @@ jobs:
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: echo ${{ steps.tag_generator.outputs.new_version }} >> tag.txt
+      # - run: echo ${{ steps.tag_generator.outputs.new_version }} >> tag.txt
 
-      - run: ls -a -l
+      # - run: ls -a -l
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: TagText
-          path: tag.txt
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: TagText
+      #     path: tag.txt
 
 
       # - name: Publish NuGet package
