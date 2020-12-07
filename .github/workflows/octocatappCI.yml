@@ -37,9 +37,9 @@ jobs:
         id: tag_text 
         run: |
           $file_text = Get-Content "tag.txt"
-          Write-Output $file_text
+          echo "::set-output name=new_version::$file_text"
 
-      - run: Write-Output $file_text
+      - run: echo ${{ steps.tag_text.outputs.new_version }}
 
       - uses: actions/download-artifact@v2 
         with:
