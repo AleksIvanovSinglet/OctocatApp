@@ -35,7 +35,7 @@ jobs:
           testvar="1.0.0"
           echo ::set-output name=test_var::$testvar
 
-      - run: echo ${{ steps.output_test.outputs.testvar }}
+      - run: echo ${{ steps.output_test.outputs.test_var }}
 
       # - name: Publish NuGet package
       #   id: publish_nuget
