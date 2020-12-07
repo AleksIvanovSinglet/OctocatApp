@@ -43,6 +43,8 @@ jobs:
 
       - run: echo ${{ steps.tag_text.outputs.new_version }}
 
+      - run: echo ${{ steps.tag_text.outputs.new_tag }}
+
       - uses: actions/download-artifact@v2 
         with:
           name: TagText
