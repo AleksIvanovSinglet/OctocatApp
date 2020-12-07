@@ -38,9 +38,13 @@ jobs:
         run: |
           $file_text = Get-Content "tag.txt"
           Write-Output $file_text
-          echo ::set-output name=tag_value::$file_text
 
-      - run: Write-Output ${{ steps.tag_text.outputs.tag_value }}
+      - run: Write-Output $file_text
+
+      - uses: actions/download-artifact@v2 
+        with:
+          name: TagText
+          path: TagText/tag.$file_text.txt
 
       # - run: echo NEW_VALUE >> tag.txt
 
