@@ -32,7 +32,11 @@ jobs:
       - name: Output test
         id: output_test
         run: |
-          testvar="1.0.0"
+          input_file="tag.txt"
+          while read line
+          do
+            testvar=$line
+          done < "$input_file"
           echo ::set-output name=test_var::$testvar
 
       - run: echo ${{ steps.output_test.outputs.test_var }}
