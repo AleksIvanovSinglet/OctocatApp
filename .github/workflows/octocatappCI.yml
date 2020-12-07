@@ -38,6 +38,8 @@ jobs:
         run: |
           $file_text = Get-Content "tag.txt"
           echo "::set-output name=new_version::$file_text"
+          $tag_text = "v" + $file_text
+          echo "::set-output name=new_tag::$tag_text"
 
       - run: echo ${{ steps.tag_text.outputs.new_version }}
 
