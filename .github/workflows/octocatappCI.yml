@@ -6,9 +6,9 @@ jobs:
   init:
     name: Initiate pipeline
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: bash
+    # defaults:
+    #   run:
+    #     shell: bash
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
