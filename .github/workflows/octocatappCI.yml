@@ -13,14 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Bump release version and create release tag
-        id: tag_generator
-        uses: mathieudutour/github-tag-action@v5
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          default_bump: false 
+      # - name: Bump release version and create release tag
+      #   id: tag_generator
+      #   uses: mathieudutour/github-tag-action@v5
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     default_bump: false 
 
-      - run: echo ${{ steps.tag_generator.outputs.new_version }} >> tag.txt
+      - run: echo 1.0.0 >> tag.txt
 
       - run: ls -a -l
 
@@ -29,6 +29,13 @@ jobs:
           name: TagText
           path: tag.txt
 
+      - name: Output test
+        id: output_test
+        run: |
+          testvar="1.0.0"
+          echo ::set-output name=test_var::$testvar
+
+      - run: echo ${{ steps.output_test.outputs.testvar }}
 
       # - name: Publish NuGet package
       #   id: publish_nuget
