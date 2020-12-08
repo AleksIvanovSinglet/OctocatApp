@@ -1,6 +1,6 @@
-on: [push, pull_request]
-
 name: OctocatApp CI
+
+on: [push, pull_request]
 
 jobs:
   init:
@@ -12,6 +12,24 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with: 
+          fetch-depth: 50 
+
+      - uses: testspace-com/setup-testspace@v1 
+        with: 
+          domain: ${{ github.repository_owner }} 
+
+      - name: Push result to Testspace server 
+        run: | 
+          testspace results.xml  
+        if: always() 
+
+
+
+
+
+
+
 
       # - name: Bump release version and create release tag
       #   id: tag_generator
@@ -19,57 +37,6 @@ jobs:
       #   with:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     default_bump: false 
-
-
-
-      # - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-      - name: Write to tag.txt
-        run: '"1.0.0" | Out-File -FilePath "tag.txt"'
-
-      # - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-      - name: Upload tag.txt
-        uses: actions/upload-artifact@v2
-        with:
-          name: TagText
-          path: tag.txt
-
-      - name: Assign tag.txt to ps variable and then to output
-        id: tag_text 
-        run: |
-          $file_text = Get-Content "tag.txt"
-          echo "::set-output name=new_version::$file_text"
-          $tag_text = "v" + $file_text
-          echo "::set-output name=new_tag::$tag_text"
-
-      - run: echo ${{ steps.tag_text.outputs.new_version }}
-
-      - run: echo ${{ steps.tag_text.outputs.new_tag }}
-
-      - uses: actions/download-artifact@v2 
-        with:
-          name: TagText
-          path: ./
-
-      - run: dir
-
-      # - run: echo NEW_VALUE >> tag.txt
-
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     name: TagText
-      #     path: tag.txt
-
-      # - name: Output test
-      #   id: output_test
-      #   run: |
-      #     input_file="tag.txt"
-      #     while read line
-      #     do
-      #       file_text=$line
-      #     done < "$input_file"
-      #     echo ::set-output name=tag_value::$file_text
-
-      # - run: echo ${{ steps.output_test.outputs.tag_value }}
 
 
 
