@@ -19,7 +19,7 @@ jobs:
 
 
       - name: Lowercase gen
-        id: lowercase_gen
+        id: lowercase_string_gen
         run: |
           $LOWERCASE_OWNER = "${{ github.repository_owner }}".ToLower()
           echo "::set-output name=owner_name::$LOWERCASE_OWNER"
