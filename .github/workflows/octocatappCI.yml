@@ -17,6 +17,8 @@ jobs:
 
       - run: echo "${{ github.repository_owner }}_${{ github.event.repository.name }}"
 
+      - run: echo "${{ github.repository_owner }}".ToLower()
+
 
 
 
