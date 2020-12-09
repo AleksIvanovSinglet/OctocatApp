@@ -15,7 +15,7 @@ jobs:
         with: 
           fetch-depth: 50 
 
-      - run: echo "${{ github.repository_owner }}_${{ github.repository.name }}"
+      - run: echo "${{ github.repository_owner }}_${{ github.event.repository.name }}"
 
 
 
