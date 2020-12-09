@@ -18,6 +18,15 @@ jobs:
       - run: echo "${{ github.repository_owner }}_${{ github.event.repository.name }}"
 
 
+      - name: Lowercase gen
+        id: lowercase_gen
+        run: |
+          $LOWERCASE_OWNER = "${{ github.repository_owner }}".ToLower()
+          echo "::set-output name=owner_name::$LOWERCASE_OWNER"
+
+      - run: echo "${{ steps.lowercase_gen.outputs.owner_name }}"
+
+
 
 
 
