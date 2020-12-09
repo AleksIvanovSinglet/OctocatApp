@@ -19,7 +19,7 @@ jobs:
 
       - run: |
           LOWERCASE_OWNER = "${{ github.repository_owner }}".ToLower()
-          echo LOWERCASE_OWNER
+          echo $LOWERCASE_OWNER
 
 
 
