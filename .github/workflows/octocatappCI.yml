@@ -19,7 +19,8 @@ jobs:
       - name: "The head_ref or source branch of the pull request in a workflow run - ${{ github.head_ref }}" 
         run: echo "The head_ref or source branch of the pull request in a workflow run - ${{ github.head_ref }}" 
         
-      - name: "The branch or tag ref that triggered the workflow run - ${{ github.ref }}"
+      - if: ${{ github.repository_owner }} != ${{ github.actor }}
+        name: "The branch or tag ref that triggered the workflow run - ${{ github.ref }}"
         run: echo "The branch or tag ref that triggered the workflow run - ${{ github.ref }}"
         
       - name: "The event_path to the full event webhook payload on the runner - ${{ github.event_path }}"
