@@ -21,6 +21,12 @@ jobs:
 
       - run: echo "The branch or tag ref that triggered the workflow run - " ${{ github.ref }}
 
+      - name: Lowercase gen
+        id: lowercase_string_gen
+        run: |
+          $LOWERCASE_OWNER = "${{ github.repository_owner }}".ToLower()
+          echo "::set-output name=owner_name::$LOWERCASE_OWNER"
+
 
 
 
@@ -36,6 +42,45 @@ jobs:
       # - run: echo "${{ steps.lowercase_gen.outputs.owner_name }}"
 
 
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+          
+      - name: Initialize SonarCloud scanner
+        id: init_sonar_scanner
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ github.repository_owner }}_${{ github.event.repository.name }}" /o:"${{ steps.lowercase_string_gen.outputs.owner_name }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"  
+          
+      - run: dotnet build
+          
+      - name: Send SonarCloud results
+        id: send_sonar_results
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
 
 
