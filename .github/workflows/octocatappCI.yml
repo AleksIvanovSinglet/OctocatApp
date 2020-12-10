@@ -15,16 +15,25 @@ jobs:
         with: 
           fetch-depth: 50 
 
-      - run: echo "${{ github.repository_owner }}_${{ github.event.repository.name }}"
+      - run: echo "The base_ref or target branch of the pull request in a workflow run - " ${{ github.base_ref }}
+
+      - run: echo "The head_ref or source branch of the pull request in a workflow run - " ${{ github.head_ref }}
+
+      - run: echo "The branch or tag ref that triggered the workflow run - " ${{ github.ref }}
 
 
-      - name: Lowercase gen
-        id: lowercase_gen
-        run: |
-          $LOWERCASE_OWNER = "${{ github.repository_owner }}".ToLower()
-          echo "::set-output name=owner_name::$LOWERCASE_OWNER"
 
-      - run: echo "${{ steps.lowercase_gen.outputs.owner_name }}"
+
+      # - run: echo "${{ github.repository_owner }}_${{ github.event.repository.name }}"
+
+
+      # - name: Lowercase gen
+      #   id: lowercase_gen
+      #   run: |
+      #     $LOWERCASE_OWNER = "${{ github.repository_owner }}".ToLower()
+      #     echo "::set-output name=owner_name::$LOWERCASE_OWNER"
+
+      # - run: echo "${{ steps.lowercase_gen.outputs.owner_name }}"
 
 
 
